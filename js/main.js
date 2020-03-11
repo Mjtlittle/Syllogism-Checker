@@ -42,6 +42,7 @@ class CategoricalStatement {
         this.quantity = null;
         this.quality = null;
         this.short_hand_type = null;
+        this.alt_short_hand_type = null;
 
         this.distributed = null;
         
@@ -51,7 +52,7 @@ class CategoricalStatement {
     }
 
     update_info() {
-        this.info_element.innerText = `${this.quantity} ${this.quality} (${this.short_hand_type}) | Distributed: ${format_list(this.distributed)}`;
+        this.info_element.innerText = `${this.quantity} ${this.quality} (${this.short_hand_type} / ${this.alt_short_hand_type}) | Distributed: ${format_list(this.distributed)}`;
     }
 
     update() {
@@ -59,6 +60,14 @@ class CategoricalStatement {
         this.quality = this.quality_element.value == 'are' ? 'Affirmative' : 'Negative';
         
         this.short_hand_type = this.quantity[0] + this.quality[0];
+        
+        // alternative more academic shorthand
+        this.alt_short_hand_type = {
+            'UA': 'SaP',
+            'UN': 'SeP',
+            'PA': 'SiP',
+            'PN': 'SoP',
+        }[this.short_hand_type];
 
         this.subject = this.subject_element.value;
         this.predicate = this.predicate_element.value;
