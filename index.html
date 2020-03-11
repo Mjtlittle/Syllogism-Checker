@@ -1,0 +1,220 @@
+<html>
+<header>
+
+    <!-- JQ and popper -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+
+    <script src="js/main.js"></script>
+
+</header>
+
+<body>
+
+    <div class="container-sm">
+        <div class="mb-4"></div>
+        
+        <div class="display-3 mb-2">Syllogism Validity Checker</div>
+        <h4 class="text-muted mb-4">made by Joshua Little</h4>
+        <p class="text-muted">A simple tool to check the validity of categorical three statement syllogisms. This was made for fun, based of my intro to logic class. There are still some missing explanations but I plan on fleshing that out in the future.</p>
+        
+        <div class="alert alert-danger" role="alert">
+            I do not claim to be an expert on the subject of logic, I have made this program to the best of my ability based on the concepts presented to me.
+        </div>
+        <hr>
+        
+        <form>
+            <div class="form-group">
+                <h4 class="mb-3">Categories / Groups</h4>
+                <div class="form-row">
+                    <input class="form-control mb-2" id="part_1" value="circles">
+                    <input class="form-control mb-2" id="part_2" value="squares">
+                    <input class="form-control" id="part_3" value="parallelograms">
+                </div>
+            </div>
+
+            <hr>
+
+            <!-- all of the below 3 sections are the same and can be made more tidy with a templating system like react or vue -->
+
+            <!--Premise 1 -->
+            <div class="form-group">
+                <h4>Premise 1</h4>
+                <div class="text-muted mb-2" id="premise_1_info"></div>
+                <div class="form-row">
+                    <div class="col-2">
+                        <label for="premise_1_quantity">Quantity</label>
+                        <select id="premise_1_quantity" class="form-control">
+                            <option selected>All</option>
+                            <option>Some</option>
+                        </select>
+                    </div>
+
+                    <div class="col-4">
+                        <label for="premise_1_subject">Subject</label>
+                        <select id="premise_1_subject" class="form-control">
+                            <option class="category_1" selected></option>
+                            <option class="category_2"></option>
+                            <option class="category_3"></option>
+                        </select>
+                    </div>
+
+                    <div class="col-2">
+                        <label for="premise_1_quality">Quality</label>
+                        <select id="premise_1_quality" class="form-control">
+                            <option>are</option>
+                            <option selected>are not</option>
+                        </select>
+                    </div>
+
+                    <div class="col-4">
+                        <label for="premise_1_predicate">Predicate</label>
+                        <select id="premise_1_predicate" class="form-control">
+                            <option class="category_1"></option>
+                            <option class="category_2" selected></option>
+                            <option class="category_3"></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Premise 2 -->
+            <div class="form-group">
+                <h4>Premise 2</h4>
+                <div class="text-muted mb-2" id="premise_2_info"></div>
+                <div class="form-row">
+                    <div class="col-2">
+                        <label for="premise_2_quantity">Quantity</label>
+                        <select id="premise_2_quantity" class="form-control">
+                            <option>All</option>
+                            <option selected>Some</option>
+                        </select>
+                    </div>
+
+                    <div class="col-4">
+                        <label for="premise_2_subject">Subject</label>
+                        <select id="premise_2_subject" class="form-control">
+                            <option class="category_1"></option>
+                            <option class="category_2"></option>
+                            <option class="category_3" selected></option>
+                        </select>
+                    </div>
+
+                    <div class="col-2">
+                        <label for="premise_2_quality">Quality</label>
+                        <select id="premise_2_quality" class="form-control">
+                            <option selected>are</option>
+                            <option>are not</option>
+                        </select>
+                    </div>
+
+                    <div class="col-4">
+                        <label for="premise_2_predicate">Predicate</label>
+                        <select id="premise_2_predicate" class="form-control">
+                            <option class="category_1"></option>
+                            <option class="category_2" selected></option>
+                            <option class="category_3"></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conclusion -->
+            <div class="form-group">
+                <h4>Conclusion</h4>
+                <div class="text-muted mb-2" id="conclusion_info"></div>
+                <div class="form-row">
+                    <div class="col-2">
+                        <label for="conclusion_quantity">Quantity</label>
+                        <select id="conclusion_quantity" class="form-control">
+                            <option>All</option>
+                            <option selected>Some</option>
+                        </select>
+                    </div>
+
+                    <div class="col-4">
+                        <label for="conclusion_subject">Subject</label>
+                        <select id="conclusion_subject" class="form-control">
+                            <option class="category_1"></option>
+                            <option class="category_2"></option>
+                            <option class="category_3" selected></option>
+                        </select>
+                    </div>
+
+                    <div class="col-2">
+                        <label for="conclusion_quality">Quality</label>
+                        <select id="conclusion_quality" class="form-control">
+                            <option>are</option>
+                            <option selected>are not</option>
+                        </select>
+                    </div>
+
+                    <div class="col-4">
+                        <label for="conclusion_predicate">Predicate</label>
+                        <select id="conclusion_predicate" class="form-control">
+                            <option class="category_1" selected></option>
+                            <option class="category_2"></option>
+                            <option class="category_3"></option>
+                        </select>
+                    </div>
+                </div>
+            </div>    
+        </form>
+
+        <hr>
+
+        <h3 class="mb-4">Validity Tests: <span id="tests_result">?</span></h3>
+        <ul>
+            <li>
+                <h4>Equal Negatives Test: <span id="equal_negatives_result">?</span></h4>
+                <p>
+                    The number of negative statements in the conclusion must equal the number of negatives in the premises.
+                    <br> 
+                    <span id="equal_negatives_details" class="text-muted"></span>
+                </p>
+            </li>
+            <li>
+                <h4>Quantity Test: <span id="quantity_result">?</span></h4>
+                <p>
+                    If both of the premises are particular in quantity, then the conclusion must also be particular, and if both premises are universals, then the conclusion must be universal.
+                    <br>
+                    <span id="quantity_details" class="text-muted"></span>
+                </p>
+                
+            </li>
+            <li>
+                <h4>Distributed Conclusion Test: <span id="distributed_conclusion_result">?</span></h4>
+                <p>
+                    If a group is distributed in the conclusion, then it must also be distributed in a premise. 
+                    <br>
+                    <span id="distributed_conclusion_details" class="text-muted"></span>
+                </p>
+            </li>
+            <li>
+                <h4>Distributed Middle Group Test: <span id="distributed_middle_result">?</span></h4>
+                <p>
+                    The middle group must be distributed in at least one of the premises.
+                    <br>
+                    <span id="distributed_middle_details" class="text-muted"></span>
+                </p>
+            </li>
+
+        </ul>
+
+        <hr class="my-5">
+    </div>
+
+
+</body>
+</html>
