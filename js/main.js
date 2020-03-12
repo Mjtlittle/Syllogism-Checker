@@ -204,8 +204,9 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         })
 
-        if ((conc.quality == 'Negative' && premise_negative_count == 1) ||
-            (conc.quality == 'Affirmative' && premise_negative_count == 0)) {
+        conclusion_negative_count = (conc.quality == 'Negative') ? 1 : 0;
+
+        if (conclusion_negative_count == premise_negative_count) {
             return [true, ''];
         } else {
             return [false, ''];
