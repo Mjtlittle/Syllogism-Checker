@@ -219,14 +219,14 @@ document.addEventListener("DOMContentLoaded", () => {
         if (all_premises_same) {
             
             if (prems[0].quantity == conc.quantity) {
-                return [true, `The test fails because the conclusion has the same quantity, ${conc.quantity}, as all of the premises.`];
+                return [true, `The test passes because the conclusion has the same quantity, ${conc.quantity}, as all of the premises.`];
             } else {
                 return [false, `The test fails because the conclusion has a different quantity, ${conc.quantity}, than the premises, ${prems[0].quantity}.`];
             }
         
         // otherwise the test does not apply and passes
         } else {
-            return [true, 'This test passes, because all of the premieses are not the same quantity.'];
+            return [true, 'This test passes, because all of the premieses do not have the same quantity.'];
         }
 
     }));
