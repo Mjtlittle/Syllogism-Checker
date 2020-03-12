@@ -257,9 +257,9 @@ document.addEventListener("DOMContentLoaded", () => {
             all_categories.add(premise.predicate);
         });
 
-        // if there is no middle, premise is valid
+        // if there is no middle, premise is invalid
         if (all_categories.size <= 2) {
-            return [true, 'There are less than or equal to two categories in the premise.'];
+            return [false, 'The test is undefined for this situation, because there are less than or equal to two categories used in the premise, and in turn no middle group.'];
         }
 
         // remove categories from conclusion till middle is left
@@ -268,7 +268,12 @@ document.addEventListener("DOMContentLoaded", () => {
         middle_category.delete(conc.predicate);
 
         // return whether all of the middle categories are distributed in the premises
-        return [Array.from(middle_category).every((category) => premise_categories_disted.has(category)), ''];
+        middle_category_distributed_in_all = Array.from(middle_category).every((category) => premise_categories_disted.has(category))
+        if (middle_category_distributed_in_all) {
+            return [true, `The test passes because the middle category, ${middle_category.values().next().value}, is distributed in at least one of the premises.`]
+        } else {
+            return [false, `The test fails because the middle category, ${middle_category.values().next().value}, is not distributed in at least one of the premises.`]
+        }
     }));
 
     update_everything();
