@@ -14,11 +14,11 @@ let all_tests = [];
 let passed_color = '#008800';
 let failed_color = '#880000';
 
-function format_list(values) {
-    if (values.length == 0) {
+function format_set(set) {
+    if (set.size == 0) {
         return 'none';
     } else {
-        return values.join(', ');
+        return Array.from(set).join(', ');
     }
 }
 
@@ -52,7 +52,7 @@ class CategoricalStatement {
     }
 
     update_info() {
-        this.info_element.innerText = `${this.quantity} ${this.quality} (${this.short_hand_type} / ${this.alt_short_hand_type}) | Distributed: ${format_list(this.distributed)}`;
+        this.info_element.innerText = `${this.quantity} ${this.quality} (${this.short_hand_type} / ${this.alt_short_hand_type}) | Distributed: ${format_set(this.distributed)}`;
     }
 
     update() {
@@ -73,12 +73,12 @@ class CategoricalStatement {
         this.predicate = this.predicate_element.value;
         
         // get the list of distributed for the statement
-        this.distributed = [];
+        this.distributed = new Set();
         if (this.quantity == 'Universal') {
-            this.distributed.push(this.subject);
+            this.distributed.add(this.subject);
         }
         if (this.quality == 'Negative') {
-            this.distributed.push(this.predicate);
+            this.distributed.add(this.predicate);
         }
 
         this.update_info();
@@ -236,11 +236,11 @@ document.addEventListener("DOMContentLoaded", () => {
         // get all distributed categories in the premieses
         let premise_categories_disted = new Set();
         prems.map((premise) => {
-            premise.distributed.map((category) => {premise_categories_disted.add(category)});
+            premise.distributed.forEach((category) => {premise_categories_disted.add(category)});
         });
         
         // check if all of the categories distributed by the conclusion are disted. in the premises
-        return [conc.distributed.every((category) => premise_categories_disted.has(category)), ''];
+        return [[...conc.distributed].every((category) => premise_categories_disted.has(category)), ''];
 
     }));
     all_tests.push(new ValidityTest('distributed_middle', (prems, conc) => {
@@ -250,7 +250,7 @@ document.addEventListener("DOMContentLoaded", () => {
         prems.map((premise) => {
             
             // get all distributed categories in the premieses
-            premise.distributed.map((category) => {premise_categories_disted.add(category)});
+            premise.distributed.forEach((category) => {premise_categories_disted.add(category)});
 
             // get all categories in premises
             all_categories.add(premise.subject);
