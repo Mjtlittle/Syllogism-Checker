@@ -119,8 +119,6 @@ class ValidityTest {
     }
 }
 
-
-
 function update_statement_categories(){
 
     // place the categories from the list into the drop downs
